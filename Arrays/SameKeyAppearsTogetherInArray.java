@@ -26,13 +26,13 @@ public class SameKeyAppearsTogetherInArray {
 		}
 		
 		System.out.println(map);
-		for(int k=0;k<map.size();k++)
-		{
-			if(map.containsKey(arr[i]))
-			{
-				for(int )
-			}
-		}
+//		for(int k=0;k<map.size();k++)
+//		{
+//			if(map.containsKey(arr[i]))
+//			{
+////				for(int )
+//			}
+//		}
 		
 		int smaller = 0, larger = list.size() - 1, equal = 0;
 		int i = 0, j = arr.length - 1;
