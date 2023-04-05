@@ -1,0 +1,41 @@
+/*
+*/
+
+import java.util.*;
+public class Solution{
+
+     public static void main(String []args){
+        List<String> list = new ArrayList<>();
+        Map<String,Integer> map = new HashMap<>();
+        /*list.add("hello");
+        list.add("world");
+        list.add("cat");
+        list.add("hello");
+        list.add("cat");
+        list.add("world");*/
+        
+        list.add("hello");
+        list.add("world");
+        list.add("cat");
+        
+        for(String s:list)
+        {
+            map.put(s,map.getOrDefault(s,0)+1);
+        }
+        System.out.println(map);
+        int max=0;
+        for(String key:map.keySet())
+        {
+            if(map.get(key) >= max)
+                max=map.get(key);
+        }
+        System.out.println(max);
+        List<String> resList = new ArrayList<>();
+        for(Map.Entry<String,Integer> e:map.entrySet())
+        {
+            if(e.getValue()==max)
+                resList.add(e.getKey());
+        }
+        System.out.println(resList);
+     }
+}
