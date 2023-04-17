@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * Directed Acyclic Graph – can’t be formed for cyclic graph , can’t be formed for undirected graph
+ * Formed for directed graph with no cycles
+ * Linear ordering of vertices such that there is and edge between u & v where u appears before v in that ordering.
+ */
+
 public class TopologicalSortDFS {
     public static void main(String[] args) {
         int graph[][] = {
