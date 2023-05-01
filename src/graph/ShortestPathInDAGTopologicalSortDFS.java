@@ -5,23 +5,22 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * Directed Acyclic Graph – can’t be formed for cyclic graph , can’t be formed for undirected graph
- * Formed for directed graph with no cycles
- * Linear ordering of vertices such that there is and edge between u & v where u appears before v in that ordering.
+
  */
 
 public class ShortestPathInDAGTopologicalSortDFS {
     public static void main(String[] args) {
-        //graph with edge and weight hence weighted graph
+        //graph with edge and unit weight of 1 hence weighted graph
         int graph[][] = {
-                {0, 1, 2}, {0, 4, 1}, {4, 5, 4}, {4, 2, 2}, {1, 2, 3}, {2, 3, 6}, {5, 3, 1}
+                {0, 1}, {0, 3}, {3, 4}, {4, 5}
+                , {5, 6}, {1, 2}, {2, 6}, {6, 7}, {7, 8}, {6, 8}
         };
-        int sourceNode = 4;
-        int nodes = 6;
+        int sourceNode = 0;
+        int nodes = 8;
         int[] distance = shortestPath(graph, sourceNode, nodes);
         System.out.println("Shortest distance from : " + sourceNode);
-        for (int d: distance
-             ) {
+        for (int d : distance
+        ) {
             System.out.println(" " + d);
         }
     }
@@ -41,7 +40,7 @@ public class ShortestPathInDAGTopologicalSortDFS {
         }
         System.out.println(stack);
 
-        //to keep the minimum distance from source node;initially infinity
+        //to keep the minimum distance from source node; initially infinity
         int distance[] = new int[nodes];
         for (int i = 0; i < nodes; i++) {
             distance[i] = (int) (1e9);
