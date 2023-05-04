@@ -22,5 +22,8 @@ public class LambdaPractice1 {
 
         int s2 = stringLength1.len("Sachin Balu");
         System.out.println(s2);
+
+
+
     }
 }
