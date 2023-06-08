@@ -1,4 +1,4 @@
-package src.graph.dijkstras;
+package src.graph.shortestpaths.dijkstras;
 
 import java.util.PriorityQueue;
 

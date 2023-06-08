@@ -1,12 +1,14 @@
-package src.graph.dijkstras;
+package src.graph.shortestpaths.dijkstras;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
+
 /*
-* ANy Graph with negative weights cannot be implemented with Dijkstras ; will result in infinite loop
-* */
-public class DijkstrasPQ {
+ * ANy Graph with negative weights cannot be implemented with Dijkstras ; will result in infinite loop
+ * */
+public class PrintDijkstrasPQ {
     public static void main(String[] args) {
         int matrix[][] = {
                 {0, 1, 4},
@@ -23,20 +25,22 @@ public class DijkstrasPQ {
         int startNode = 0;
         List<List<DPair>> adjList = new ArrayList<>();
 
-        int distance[] = dijkstrasAlgo(adjList, nodes, startNode, matrix);
-        for (int i = 0; i < distance.length; i++) {
-            System.out.println(" " + distance[i]);
+        List<Integer> path = dijkstrasAlgo(adjList, nodes, startNode, matrix, 4);
+        for (int i = 0; i < path.size(); i++) {
+            System.out.print(" " + path.get(i));
         }
     }
 
-    private static int[] dijkstrasAlgo(List<List<DPair>> adjList, int nodes, int startNode, int[][] matrix) {
+    private static List<Integer> dijkstrasAlgo(List<List<DPair>> adjList, int nodes, int startNode, int[][] matrix, int dest) {
         createAdjList(nodes, adjList, matrix);
         System.out.println();
 
         PriorityQueue<PQPair> priorityQueue = new PriorityQueue<PQPair>();
         int distance[] = new int[nodes];
+        int parent[] = new int[nodes];
         for (int i = 0; i < nodes; i++) {
             distance[i] = (int) 1e9;
+            parent[i] = i;
         }
         distance[startNode] = 0;
         priorityQueue.add(new PQPair(0, startNode));
@@ -50,10 +54,23 @@ public class DijkstrasPQ {
                 if (dist + nWeight < distance[neighborNode]) {
                     distance[neighborNode] = dist + nWeight;
                     priorityQueue.add(new PQPair(distance[neighborNode], neighborNode));
+                    parent[neighborNode] = node;
                 }
             }
         }
-        return distance;
+        List<Integer> path = new ArrayList<>();
+        if (distance[dest] == 1e9) {
+            path.add(-1);
+            return path;
+        }
+        int node = dest;
+        while (parent[node] !=node){
+            path.add(node);
+            node = parent[node];
+        }
+        path.add(startNode);
+        Collections.reverse(path);
+        return path;
     }
 
     public static void createAdjList(int nodes, List<List<DPair>> adjList, int[][] matrix) {
@@ -67,27 +84,4 @@ public class DijkstrasPQ {
     }
 }
 
-class DPair {
-    int node;
-    int distance;
 
-    DPair(int n, int d) {
-        this.node = n;
-        this.distance = d;
-    }
-}
-
-class PQPair implements Comparable<PQPair> {
-    int distance;
-    int node;
-
-    PQPair(int d, int n) {
-        this.distance = d;
-        this.node = n;
-    }
-
-    @Override
-    public int compareTo(PQPair other) {
-        return Integer.compare(this.distance, other.distance);
-    }
-}

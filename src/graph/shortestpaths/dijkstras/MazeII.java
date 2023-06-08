@@ -1,8 +1,6 @@
-package src.graph.dijkstras;
+package src.graph.shortestpaths.dijkstras;
 
-import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class MazeII {
     public static void main(String[] args) {

@@ -1,51 +1,46 @@
-package src.graph.dijkstras;
+package src.graph.shortestpaths.dijkstras;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class ShortestDistanceMaze {
+public class ShortestPathBinaryMatrix {
     public static void main(String[] args) {
         int[][] grid = {
-                {0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 1, 0},
-                {1, 1, 0, 1, 1},
-                {0, 0, 0, 0, 0}
+                {0, 0, 0}, {1, 1, 0}, {1, 1, 0}
         };
 
-        int start[] = {0, 4};
-        int destination[] = {4, 4};
-
-        int distance = shortestDistanceDijkstras(grid, start, destination);
+        int distance = shortestDistanceDijkstras(grid);
         System.out.println("Shortest Path: " + distance);
     }
 
-    private static int shortestDistanceDijkstras(int[][] grid, int[] start, int[] destination) {
+    private static int shortestDistanceDijkstras(int[][] grid) {
 
 
-        // if source and destination are same
-        if (start[0] == destination[0] && start[1] == destination[1]) {
-            return 0;
-        }
         int rows = grid.length;
         int cols = grid[0].length;
-
+        //if source and destination does not contain 0
+        if (grid[0][0] == 1 || grid[rows - 1][cols - 1] == 1) {
+            return -1;
+        }
         int distance[][] = new int[rows][cols]; // to store the distance for each cell
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 distance[i][j] = (int) 1e9;
             }
         }
-        //setting  distance of start[] node to 0
-        distance[start[0]][start[1]] = 0;
+        distance[0][0] = 0;
         Queue<Tuple> queue = new LinkedList<>();
-        queue.add(new Tuple(0, start[0], start[1]));
-        //since traversal allowed in four directions
+        queue.add(new Tuple(0, 0, 0));
+        //since traversal allowed in 8 directions
         int neighbours[][] = {
                 {-1, 0},
+                {-1, +1},
                 {0, +1},
+                {+1, +1},
                 {+1, 0},
+                {+1, -1},
                 {0, -1},
+                {-1, -1}
         };
 
         while (!queue.isEmpty()) {
@@ -60,30 +55,17 @@ public class ShortestDistanceMaze {
 
                 if (nrow >= 0 && nrow < rows
                         && ncol >= 0 && ncol < cols
-                        && grid[nrow][ncol] == 1
+                        //we are moving only if 0
+                        && grid[nrow][ncol] == 0
                         && cdistance + 1 < distance[nrow][ncol]) {
                     distance[nrow][ncol] = cdistance + 1;
-                    if (nrow == destination[0] && ncol == destination[1])
-                        return cdistance + 1;
                     queue.add(new Tuple(1 + cdistance, nrow, ncol));
                 }
             }
         }
-        return -1;
+        //if destination is 0 but not reachable through path
+        return distance[rows - 1][cols - 1] == 1e9 ? -1 : distance[rows - 1][cols - 1] + 1;
     }
 }
 
-class Tuple {
-    int distance, row, col;
 
-    Tuple(int d, int r, int c) {
-        this.distance = d;
-        this.row = r;
-        this.col = c;
-    }
-
-//    @Override
-//    public int compareTo(Tuple o) {
-//        return Integer.compare(o.distance, this.distance);
-//    }
-}
