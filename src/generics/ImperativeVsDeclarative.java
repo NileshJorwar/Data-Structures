@@ -19,5 +19,11 @@ public class ImperativeVsDeclarative {
                 .reduce((x,y)->x+y)
                 .getAsInt();
         System.out.println("SUm" + sum);
+
+        int sumOdd = IntStream.rangeClosed(0,100)
+                .filter(i->i%2==1)
+                .reduce((x,y)->x+y)
+                .getAsInt();
+        System.out.println(sumOdd);
     }
 }
