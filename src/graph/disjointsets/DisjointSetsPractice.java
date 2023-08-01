@@ -63,11 +63,11 @@ public class DisjointSetsPractice {
     }
     public static void main(String[] args) {
         DisjointSetsPractice disjointSets = new DisjointSetsPractice(7);
-        disjointSets.unionByRank(1, 2);
-        disjointSets.unionByRank(2, 3);
-        disjointSets.unionByRank(4, 5);
-        disjointSets.unionByRank(5, 6);
-        disjointSets.unionByRank(6, 7);
+        disjointSets.unionBySize(0, 1);
+        disjointSets.unionBySize(2, 3);
+        disjointSets.unionBySize(1, 2);
+        disjointSets.unionByRank(3, 4);
+//        disjointSets.unionByRank(6, 7);
 //        disjointSets.unionByRank(3,7);
 
         //3 == 7?
