@@ -18,16 +18,17 @@ public class AccountsMerge {
         //mary@mail.com - 2
         //johnnybravo@mail.com - 3
 
-        accountsMerge(ls);
+        List<List<String>> ans = accountsMerge(ls);
+        System.out.println(ans);
     }
 
-    public static List<List<String>> accountsMerge(List<List<String>> accounts) {
-        int n = accounts.size();
-        DisjointSetsPractice disjointSetsPractice =
-                new DisjointSetsPractice(n);
+    private static List<List<String>> accountsMerge(List<List<String>> accounts) {
+        List<List<String>> ans = new ArrayList<>();
+        int len = accounts.size();
         Map<String, Integer> map = new HashMap<>();
-        //for each email, create a map entry and if map key exists -- join their values by union
-        for (int i = 0; i < n; i++) {
+        DisjointSetsPractice disjointSetsPractice =
+                new DisjointSetsPractice(len);
+        for (int i = 0; i < len; i++) {
             for (int j = 1; j < accounts.get(i).size(); j++) {
                 String email = accounts.get(i).get(j);
                 if (!map.containsKey(email)) {
@@ -38,20 +39,18 @@ public class AccountsMerge {
             }
         }
 
-        System.out.println(map);
-
         List<List<String>> mergedEmails = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            mergedEmails.add(new ArrayList<String>());
+        for (int i = 0; i < len; i++) {
+            mergedEmails.add(new ArrayList<>());
         }
+
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             String email = entry.getKey();
-            int ulp = disjointSetsPractice.findUltimateParent(entry.getValue());
-            mergedEmails.get(ulp).add(email);
+            int ultimateParent = disjointSetsPractice.findUltimateParent(entry.getValue());
+            mergedEmails.get(ultimateParent).add(email);
         }
-        List<List<String>> ans = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < len; i++) {
             if (mergedEmails.get(i).size() == 0)
                 continue;
             Collections.sort(mergedEmails.get(i));
@@ -62,7 +61,8 @@ public class AccountsMerge {
             }
             ans.add(temp);
         }
-        System.out.println("Ans: " + ans);
         return ans;
     }
+
+
 }

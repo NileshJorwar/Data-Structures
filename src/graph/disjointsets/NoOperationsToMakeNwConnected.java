@@ -19,31 +19,29 @@ public class NoOperationsToMakeNwConnected {
         //find out extra edges while connecting components
         //after connecting comps, get the diff comps length
         //if extra edges > no of components -1, return edges because min edges required are total comps - 1
-
         DisjointSetsPractice disjointSetsPractice =
                 new DisjointSetsPractice(n);
         int extraEdges = 0;
-        for (int[] currentConnection : connections) {
-            int src = currentConnection[0];
-            int dest = currentConnection[1];
-
-            if (disjointSetsPractice.findUltimateParent(src)
-                    != disjointSetsPractice.findUltimateParent(dest)) {
-                disjointSetsPractice.unionBySize(src, dest);
+        for (int connection[] : connections) {
+            int source = connection[0];
+            int destination = connection[1];
+            if (disjointSetsPractice.findUltimateParent(source) != disjointSetsPractice.findUltimateParent(destination)) {
+                disjointSetsPractice.unionBySize(source, destination);
             } else {
                 extraEdges++;
             }
         }
+
         int comps = 0;
         for (int i = 0; i < n; i++) {
             if (disjointSetsPractice.findUltimateParent(i) == i) {
                 comps++;
             }
         }
-        int ans = comps -1;
-        if (extraEdges >= ans)
+        int ans = comps - 1;
+        if (extraEdges >= ans) {
             return ans;
+        }
         return -1;
-
     }
 }
