@@ -1,4 +1,4 @@
-package src.graph;
+package src.graph.scc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,17 @@ import java.util.Stack;
 
 public class KosarajusStronglyConnectedComps {
     public static void main(String[] args) {
-        int n = 5;
+        int n = 8;
         int[][] edges = {
-                {1, 0}, {0, 2},
-                {2, 1}, {0, 3},
-                {3, 4}
+                {0, 1}, {1, 2},
+                {2, 0}, {2, 3},
+                {3, 4},
+                {4, 5},
+                {5, 6},
+                {6, 4},
+                {6, 7},
+                {4, 7},
+
         };
 
 
@@ -28,62 +34,56 @@ public class KosarajusStronglyConnectedComps {
         for (int i = 0; i < n; i++) {
             adj.add(new ArrayList<>());
         }
-
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < edges.length; i++) {
             adj.get(edges[i][0]).add(edges[i][1]);
         }
 
-        int comps = kosarajusAlgo(adj, n);
+        int scc = kosarajusAlgo(adj, n);
+        System.out.println("Strongly connected comps:" + scc);
     }
 
     private static int kosarajusAlgo(List<List<Integer>> adj, int nodes) {
+        //sort the edges based on finishing time; use of stack
         Stack<Integer> stack = new Stack<>();
         boolean visited[] = new boolean[nodes];
         for (int i = 0; i < nodes; i++) {
-            if (!visited[i]) {
+            if (!visited[i])
                 dfs(adj, i, stack, visited);
+        }
+
+        //once the edges are sorted, reverse the graph using another Adjlist
+        List<List<Integer>> adjReverse = new ArrayList<>();
+        for (int i = 0; i < nodes; i++) {
+            adjReverse.add(new ArrayList<>());
+        }
+        for (int i = 0; i < nodes; i++) {
+            visited[i] = false;
+            for (int adjNode : adj.get(i)
+            ) {
+                adjReverse.get(adjNode).add(i);
             }
         }
 
-        System.out.println(stack);
-        //found nodes with finishing time
-        //now, reverse the edges, hence create new adjList
-
-        List<List<Integer>> adjT = new ArrayList<>();
-        for (int i = 0; i < nodes; i++) {
-            adjT.add(new ArrayList<>());
-
-        }
-        for (int i = 0; i < nodes; i++) {
-            visited[i]=false;
-            for (int adjNode: adj.get(i)
-                 ) {
-                adjT.get(adjNode).add(i);
-            }
-        }
-
-        System.out.println(adjT);
+        //once reversed, used adjList new one and use stack to get the SCCs
         int scc = 0;
-        while(!stack.isEmpty()){
-
-            int node= stack.pop();
-            if(!visited[node]){
+        while (!stack.isEmpty()) {
+            int node = stack.pop();
+            if (!visited[node]) {
                 scc++;
-                dfs(node, visited, adjT);
+                dfs(node, visited, adjReverse);
             }
-
         }
 
         return scc;
+
     }
 
     private static void dfs(int node, boolean[] visited, List<List<Integer>> adjT) {
         visited[node] = true;
         for (int adjNode : adjT.get(node)
         ) {
-            if(!visited[adjNode]){
+            if (!visited[adjNode])
                 dfs(adjNode, visited, adjT);
-            }
         }
     }
 
@@ -91,9 +91,8 @@ public class KosarajusStronglyConnectedComps {
         visited[node] = true;
         for (int adjNode : adj.get(node)
         ) {
-            if(!visited[adjNode]){
-                dfs(adj, adjNode, stack,visited);
-            }
+            if (!visited[adjNode])
+                dfs(adj, adjNode, stack, visited);
         }
         stack.push(node);
     }
