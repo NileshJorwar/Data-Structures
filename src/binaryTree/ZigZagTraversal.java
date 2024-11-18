@@ -15,15 +15,17 @@ public class ZigZagTraversal {
         rootNode.left.right = new Node(4);
         rootNode.left.right.left = new Node(5);
         rootNode.left.right.right = new Node(6);
-        List<Integer> ans = zigZagTraversal(rootNode);
+//        List<Integer> ans = zigZagTraversal(rootNode);
+        List<Integer> ans = zigZagTraversal2(rootNode);
         System.out.println(ans + ": zigzag pattern");
     }
+
     /*
-    *           1
-    *       2       7
-    * 3         4
-    *        5      6
-    * */
+     *           1
+     *       2       7
+     * 3         4
+     *        5      6
+     * */
     public static List<Integer> zigZagTraversal(Node rootNode) {
         List<Integer> ans = new ArrayList<>();
         if (rootNode == null)
@@ -36,22 +38,51 @@ public class ZigZagTraversal {
             LinkedList<Integer> temp = new LinkedList<>();
             for (int i = 0; i < size; i++) {
                 Node node = queue.poll();
-                if(node.left!=null)
+                if (node.left != null)
                     queue.add(node.left);
-                if(node.right!=null)
+                if (node.right != null)
                     queue.add(node.right);
-                if(leftRightFlag)
+                if (leftRightFlag)
                     temp.addFirst(node.data);
-                else{
+                else {
                     temp.addLast(node.data);
                 }
             }
             ans.addAll(temp);
-            leftRightFlag=!leftRightFlag;
+            leftRightFlag = !leftRightFlag;
         }
         return ans;
 
     }
 
+    public static List<Integer> zigZagTraversal2(Node rootNode) {
+        List<Integer> integerList = new ArrayList<>();
+        boolean flag = false;
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(rootNode);
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            LinkedList<Integer> tempList = new LinkedList<>();
+            for (int i=0 ;i < size;i++){
+                Node node = queue.poll();
+                if(node.left !=null){
+                    queue.add(node.left);
+                }
+                if(node.right !=null){
+                    queue.add(node.right);
+                }
+                if(flag){
+                    tempList.addFirst(node.data);
+                }else{
+                    tempList.addLast(node.data);
+                }
+            }
+            integerList.addAll(tempList);
+            flag=!flag;
+        }
+
+        return integerList;
+
+    }
 
 }
