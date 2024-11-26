@@ -1,7 +1,6 @@
 package src.binaryTree;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 public class TopViewOfBT {
@@ -47,7 +46,7 @@ public class TopViewOfBT {
             Node n = t.node;
 
             if(!map.containsKey(vertical)){
-                map.put(vertical, n.data);
+                map.put(vertical, n.val);
             }
             if(n.left!=null){
                 queue.add(new Tuple(n.left, vertical-1));

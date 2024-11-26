@@ -25,12 +25,12 @@ public class BinaryTreePaths {
 
     private static void binaryTreePaths(Node node, String path, List<String> answer) {
         if (node.left == null && node.right == null) {
-            answer.add(path+node.data);
+            answer.add(path+node.val);
         }
         if(node.left!=null)
-            binaryTreePaths(node.left, path + node.data + "->", answer);
+            binaryTreePaths(node.left, path + node.val + "->", answer);
         if(node.right!=null)
-            binaryTreePaths(node.right, path + node.data + "->", answer);
+            binaryTreePaths(node.right, path + node.val + "->", answer);
     }
 
 

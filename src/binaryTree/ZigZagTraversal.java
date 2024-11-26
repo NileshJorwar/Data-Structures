@@ -43,9 +43,9 @@ public class ZigZagTraversal {
                 if (node.right != null)
                     queue.add(node.right);
                 if (leftRightFlag)
-                    temp.addFirst(node.data);
+                    temp.addFirst(node.val);
                 else {
-                    temp.addLast(node.data);
+                    temp.addLast(node.val);
                 }
             }
             ans.addAll(temp);
@@ -72,9 +72,9 @@ public class ZigZagTraversal {
                     queue.add(node.right);
                 }
                 if(flag){
-                    tempList.addFirst(node.data);
+                    tempList.addFirst(node.val);
                 }else{
-                    tempList.addLast(node.data);
+                    tempList.addLast(node.val);
                 }
             }
             integerList.addAll(tempList);

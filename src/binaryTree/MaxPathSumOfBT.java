@@ -26,8 +26,8 @@ public class MaxPathSumOfBT {
             return 0;
         int left = Math.max(0, maxPathSum(node.left));
         int right = Math.max(0, maxPathSum(node.right));
-        max_sum = Math.max(max_sum, left + right + node.data);
-        return node.data + Math.max(left, right);
+        max_sum = Math.max(max_sum, left + right + node.val);
+        return node.val + Math.max(left, right);
     }
 
 }

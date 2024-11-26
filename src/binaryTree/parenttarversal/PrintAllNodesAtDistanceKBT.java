@@ -58,7 +58,7 @@ public class PrintAllNodesAtDistanceKBT {
 
         }
 
-        result = queue.stream().map(x->x.data).collect(Collectors.toList());
+        result = queue.stream().map(x->x.val).collect(Collectors.toList());
 
         return result;
     }

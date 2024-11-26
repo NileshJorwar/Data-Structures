@@ -3,7 +3,6 @@ package src.binaryTree.parenttarversal;
 import src.binaryTree.Node;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 public class TimeToBurnBT {
@@ -61,7 +60,7 @@ public class TimeToBurnBT {
     public static void findTargetNode(Node root, int start, Node[] target) {
         if (root == null)
             return;
-        if (root.data == start) {
+        if (root.val == start) {
             target[0] = root;
             return;
         }

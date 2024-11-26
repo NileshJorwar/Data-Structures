@@ -2,7 +2,6 @@ package src.binaryTree;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class TraversalsTreeIterativeRecursiveUsingStacks {
     public static void main(String[] args) {
@@ -48,14 +47,14 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
     public static void inOrder(Node root) {
         if (root != null) {
             inOrder(root.left);
-            System.out.print(root.data + " ");
+            System.out.print(root.val + " ");
             inOrder(root.right);
         }
     }
 
     public static void preOrder(Node root) {
         if (root != null) {
-            System.out.print(root.data + " ");
+            System.out.print(root.val + " ");
             preOrder(root.left);
             preOrder(root.right);
         }
@@ -65,7 +64,7 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
         if (root != null) {
             postOrder(root.left);
             postOrder(root.right);
-            System.out.print(root.data + " ");
+            System.out.print(root.val + " ");
         }
     }
 
@@ -75,7 +74,7 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
         List<Integer> arrayList = new ArrayList<>();
         while (!queue.isEmpty()) {
             Node current = queue.poll();
-            arrayList.add(current.data);
+            arrayList.add(current.val);
             if (current.left != null) {
                 queue.add(current.left);
             }
@@ -92,7 +91,7 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
         stack.push(root);
         while (!stack.isEmpty()) {
             Node n = stack.pop();
-            ans.add(n.data);
+            ans.add(n.val);
             if (n.right != null) {
                 stack.push(n.right);
             }
@@ -110,7 +109,7 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
         stack.push(root);
         while (!stack.isEmpty()) {
             Node current = stack.pop();
-            arrayList.add(current.data);
+            arrayList.add(current.val);
             if (current.right != null)
                 stack.push(current.right);
             if (current.left != null)
@@ -132,7 +131,7 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
                     break;
                 }
                 Node k = stack.pop();
-                ans.add(k.data);
+                ans.add(k.val);
                 n = k.right;
             }
         }
@@ -153,7 +152,7 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
                 if (stack.isEmpty())
                     break;
                 Node temp = stack.pop();
-                arrayList.add(temp.data);
+                arrayList.add(temp.val);
                 node = temp.right;
             }
         }
@@ -167,7 +166,7 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
         stack1.push(root);
         while(!stack1.isEmpty()){
             Node n = stack1.pop();
-            res.push(n.data);
+            res.push(n.val);
             if(n.left!=null){
                 stack1.push(n.left);
             }
@@ -184,7 +183,7 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
         stack1.push(root);
         while (!stack1.isEmpty()) {
             Node node = stack1.pop();
-            stack2.push(node.data);
+            stack2.push(node.val);
             if (node.left != null)
                 stack1.push(node.left);
             if (node.right != null)
@@ -217,10 +216,10 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
                 temp = stack1.peek().right;
                 if (temp == null) {
                     temp = stack1.pop();
-                    list.add(temp.data);
+                    list.add(temp.val);
                     while (!stack1.isEmpty() && temp == stack1.peek().right) {
                         temp = stack1.pop();
-                        list.add(temp.data);
+                        list.add(temp.val);
                     }
                 } else
                     current = temp;
@@ -242,7 +241,7 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
             Pair p = stack.pop();
             if(p.number == 1){
                 // preorder
-                preOrder.add(p.node.data);
+                preOrder.add(p.node.val);
                 p.number++;
                 stack.push(p);
                 if(p.node.left!=null){
@@ -251,7 +250,7 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
             }
             else if(p.number == 2){
                 // preorder
-                inOrder.add(p.node.data);
+                inOrder.add(p.node.val);
                 p.number++;
                 stack.push(p);
                 if(p.node.left!=null){
@@ -259,7 +258,7 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
                 }
             }
             else{
-                postOrder.add(p.node.data);
+                postOrder.add(p.node.val);
             }
         }
         return inOrder;
@@ -277,21 +276,21 @@ public class TraversalsTreeIterativeRecursiveUsingStacks {
         while (!stack.isEmpty()) {
             Pair p = stack.pop();
             if (p.number == 1) {
-                preOrder.add(p.node.data);
+                preOrder.add(p.node.val);
                 p.number++;
                 stack.push(p);
                 if (p.node.left != null) {
                     stack.push(new Pair(p.node.left, 1));
                 }
             } else if (p.number == 2) {
-                inOrder.add(p.node.data);
+                inOrder.add(p.node.val);
                 p.number++;
                 stack.push(p);
                 if (p.node.right != null) {
                     stack.push(new Pair(p.node.right, 1));
                 }
             } else {
-                postOrder.add(p.node.data);
+                postOrder.add(p.node.val);
             }
         }
 //        ans = Stream.concat(preOrder.stream(), inOrder.stream(), postOrder.stream()).collect(Collectors.toList());

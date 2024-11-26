@@ -1,8 +1,5 @@
 package src.binaryTree;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 /*
  * At any time node's value should be left+right nodes values
  * */
@@ -28,31 +25,31 @@ public class ChildSumPropertyOfBT {
         }
         int child = 0;
         if (root.left != null) {
-            child += root.left.data;
+            child += root.left.val;
         }
         if (root.right != null) {
-            child += root.right.data;
+            child += root.right.val;
         }
-        if (child >= root.data) {
-            root.data = child;
+        if (child >= root.val) {
+            root.val = child;
         } else {
             if (root.left != null)
-                root.left.data = root.data;
+                root.left.val = root.val;
             if (root.right != null)
-                root.right.data = root.data;
+                root.right.val = root.val;
         }
         childSumProperty(root.left);
         childSumProperty(root.right);
 
         int total = 0;
         if (root.left != null) {
-            total += root.left.data;
+            total += root.left.val;
         }
         if (root.right != null) {
-            total += root.right.data;
+            total += root.right.val;
         }
         if (root.left != null || root.right != null) {
-            root.data = total;
+            root.val = total;
         }
     }
 

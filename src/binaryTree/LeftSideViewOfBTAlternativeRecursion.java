@@ -28,7 +28,7 @@ public class LeftSideViewOfBTAlternativeRecursion {
         if (node == null)
             return;
         if(result.size()==level){
-            result.add(node.data);
+            result.add(node.val);
         }
         leftSideViewRecursive(node.left, level+1);
         leftSideViewRecursive(node.right, level+1);

@@ -30,7 +30,7 @@ public class ConstructBinaryTreeFrmInorderPreorder {
 
         Node root = new Node(preOrder[preStart]);
 
-        int inRoot = inOrderMap.get(root.data);
+        int inRoot = inOrderMap.get(root.val);
         int numsLeft = inRoot - inStart;
 
         root.left = buildTree(inorder, inStart, inRoot - 1,

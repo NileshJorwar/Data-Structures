@@ -26,7 +26,7 @@ public class BoundaryTraversal {
     public static List<Integer> boundaryTraversal(Node rootNode) {
         var list = new ArrayList<Integer>();
         if (isLeafNode(rootNode) == false)
-            list.add(rootNode.data);
+            list.add(rootNode.val);
         addLeftBoundary(rootNode, list);
         addLeaves(rootNode, list);
         addRightBoundaryReversed(rootNode, list);
@@ -39,7 +39,7 @@ public class BoundaryTraversal {
         var temp = new ArrayList<Integer>();
         while (current != null) {
             if (isLeafNode(current) == false)
-                temp.add(current.data);
+                temp.add(current.val);
             if (current.right != null)
                 current = current.right;
             else
@@ -53,7 +53,7 @@ public class BoundaryTraversal {
 
     private static void addLeaves(Node rootNode, ArrayList<Integer> list) {
         if (isLeafNode(rootNode)) {
-            list.add(rootNode.data);
+            list.add(rootNode.val);
             return;
         }
         if (rootNode.left != null)
@@ -66,7 +66,7 @@ public class BoundaryTraversal {
         Node current = rootNode.left;
         while (current != null) {
             if (isLeafNode(current) == false)
-                list.add(current.data);
+                list.add(current.val);
             if (current.left != null)
                 current = current.left;
             else

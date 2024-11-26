@@ -45,7 +45,7 @@ public class RightSideViewOfBT {
             int level = t.level;
             Node n = t.node;
             //TODO: first traverse to left and overwrite with right node values per level
-            map.put(level, n.data);
+            map.put(level, n.val);
             if(n.left!=null){
                 queue.add(new Tuple(n.left,level+1));
             }

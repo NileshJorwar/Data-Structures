@@ -57,7 +57,7 @@ public class VerticalOrderTraversalBT {
                 map.get(vertical).put(level, new PriorityQueue<Integer>());
             }
 
-            map.get(vertical).get(level).add(node1.data);
+            map.get(vertical).get(level).add(node1.val);
             if (node1.left != null) {
                 queue.add(new Tuple(node1.left, vertical - 1, level + 1));
             }

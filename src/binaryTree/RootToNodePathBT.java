@@ -33,8 +33,8 @@ public class RootToNodePathBT {
         if(rootNode == null){
             return false;
         }
-        integerList.add(rootNode.data);
-        if(rootNode.data == value){
+        integerList.add(rootNode.val);
+        if(rootNode.val == value){
             return true;
         }
         if(getRootToNodePath(rootNode.left, value, integerList) ||

@@ -53,7 +53,7 @@ public class SerializeBinaryTree {
                 res.append("#,");
                 continue;
             }
-            res.append(n.data).append(",");
+            res.append(n.val).append(",");
             queue.add(n.left);
             queue.add(n.right);
 

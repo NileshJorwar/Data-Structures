@@ -45,7 +45,7 @@ public class BottomViewOfBT {
             int vertical = t.vertical;
             Node n = t.node;
             //TODO: Only change when compared to Top View of BT here is -- overwriting the original with new one
-            map.put(vertical, n.data);
+            map.put(vertical, n.val);
             if(n.left!=null){
                 queue.add(new Tuple(n.left,vertical-1));
             }
