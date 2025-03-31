@@ -2,6 +2,7 @@ package src.binaryTree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 
 public class InOrderTraversalLC {
@@ -14,6 +15,25 @@ public class InOrderTraversalLC {
 
         new InOrderTraversalLC().inorderTraversal(treeNodeSL);
     }
+    public List<Integer> practice(TreeNodeSL root){
+        Stack<TreeNodeSL> stack = new Stack<>();
+        List<Integer> result = new ArrayList<>();
+        TreeNodeSL node = root;
+        while(true){
+            if(node!=null){
+                stack.push(node);
+                node = node.left;
+            }else{
+                if(stack.isEmpty())
+                    break;
+                TreeNodeSL n = stack.pop();
+                result.add(n.val);
+                n=n.right;
+            }
+        }
+        return result;
+    }
+
 
     public List<Integer> inorderTraversal(TreeNodeSL root) {
         if (root == null)
