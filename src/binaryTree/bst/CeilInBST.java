@@ -16,8 +16,9 @@ public class CeilInBST {
         rootNode.left.right = new Node(7);
         rootNode.right.right = new Node(19);
         rootNode.right.right.left = new Node(17);
-        int ceil = ceil(rootNode, 8);
-        System.out.println(ceil);
+//        int ceil = ceil(rootNode, 8);
+        int ceil2 = ceilPractice(rootNode, 8);
+        System.out.println(ceil2);
     }
 
     private static int ceil(Node root, int val) {
@@ -37,5 +38,21 @@ public class CeilInBST {
         return ceil;
     }
 
+    private static int ceilPractice(Node root, int key){
+        int ceil = -1;
+        while(root!=null){
+            if(root.val == key){
+                ceil = root.val;
+                return ceil;
+            }
+            if(key < root.val){
+                ceil = root.val;
+                root= root.left;
+            }else{
+                root=root.right;
+            }
+        }
+        return ceil;
+    }
 
 }

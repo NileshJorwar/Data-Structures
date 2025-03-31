@@ -37,5 +37,22 @@ public class FloorInBST {
         return floor;
     }
 
+    private static int floorTest(Node root, int key) {
+// largest node in the Binary Search Tree
+// that is smaller than or equal to the given key.
+        int floor = -1;
+        while (root != null) {
+            if(root.val==key){
+                return root.val;
+            }
+            if(key < root.val){
+                root=root.left;
+            }else{
+                floor = root.val;
+                root=root.right;
+            }
+        }
+        return floor;
+    }
 
 }
